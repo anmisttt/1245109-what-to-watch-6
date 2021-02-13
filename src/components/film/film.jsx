@@ -1,6 +1,6 @@
 import React from "react";
 
-const FilmCard = () => {
+const Film = () => {
   return (
     <>
       <article className="small-movie-card catalog__movies-card">
@@ -22,4 +22,4 @@ const FilmCard = () => {
   );
 };
 
-export default FilmCard;
+export default Film;

@@ -10,7 +10,10 @@ Thumbs.db
 # Вспомогательные файлы
 *.log*
 node_modules/
+.vscode
 
 #Bundle
 public/bundle.js
 public/bundle.js.map
+
+
