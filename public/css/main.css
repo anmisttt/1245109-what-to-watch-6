@@ -1397,3 +1397,42 @@ main {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%); }
+
+.not-found {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(-180deg, #180202 0%, #000000 100%);
+}
+
+
+.not-found .number {
+  margin-bottom: 20px;
+  font-family: "Arial Black",sans-serif;
+  font-size: 50px;
+  line-height: 45px;
+  color: #eee5b5;
+}
+
+.not-found .main-return {
+  display: block;
+  padding: 29px 40px;
+  background: 0 0;
+  border: 1px solid rgba(217,202,116,.2);
+  border-radius: 8px;
+  -webkit-transition: border-color .2s;
+  transition: border-color .2s;
+  font-size: 32px;
+  line-height: 26px;
+  text-align: center;
+  text-decoration: none;
+  color: #d9ca74;
+  cursor: pointer;
+}
+
+.not-found .main-return:hover {
+  border-color: rgba(217,202,116,.5);
+}

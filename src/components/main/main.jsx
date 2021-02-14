@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FilmCard from "../filmCard/filmCard";
+import FilmCard from "../film-card/film-card";
 
 const Main = (props) => {
   const {filmInfo} = props;
