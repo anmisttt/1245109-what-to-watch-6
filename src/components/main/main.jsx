@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Film from "../film/film";
+import FilmCard from "../film-card/film-card";
 
 const Main = (props) => {
   const {filmInfo} = props;
@@ -140,7 +140,7 @@ const Main = (props) => {
 
           <div className="catalog__movies-list">
             {cardsArr.map((x, i) => (
-              <Film key={Math.random() * i} />
+              <FilmCard key={Math.random() * i} />
             ))}
           </div>
 
