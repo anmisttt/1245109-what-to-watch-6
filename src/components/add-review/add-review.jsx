@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const AddReview = () => {
+const AddReview = (props) => {
+  const {film} = props;
   return (
     <React.Fragment>
       <div className="visually-hidden">
@@ -31,7 +33,7 @@ const AddReview = () => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__header">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={film.backgroundImage} alt="The Grand Budapest Hotel" />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -64,7 +66,7 @@ const AddReview = () => {
           </header>
 
           <div className="movie-card__poster movie-card__poster--small">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+            <img src={film.posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
           </div>
         </div>
 
@@ -119,4 +121,11 @@ const AddReview = () => {
   );
 }
 ;
+
+AddReview.propTypes = {
+  film: PropTypes.shape({
+    posterImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+  })
+};
 export default AddReview;
