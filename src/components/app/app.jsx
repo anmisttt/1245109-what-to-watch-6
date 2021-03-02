@@ -11,27 +11,27 @@ import NotFound from "../not-found/not-found";
 
 
 const App = (props) => {
-  const {filmInfo} = props;
+  const {filmInfo, films} = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Main filmInfo={filmInfo}></Main>;
+          <Main filmInfo={filmInfo} films={films}></Main>;
         </Route>
         <Route exact path="/login">
           <SignIn/>
         </Route>
         <Route exact path="/mylist">
-          <MyList/>
+          <MyList films={films}></MyList>
         </Route>
         <Route exact path="/films/:id">
           <Film/>
         </Route>
         <Route exact path="/films/:id/review">
-          <AddReview/>
+          <AddReview film={films[0]}/>
         </Route>
         <Route exact path="/player/:id">
-          <Player/>
+          <Player film={films[0]}/>
         </Route>
         <Route>
           <NotFound/>
@@ -47,6 +47,7 @@ App.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
   }),
+  films: PropTypes.array.isRequired
 };
 
 export default App;

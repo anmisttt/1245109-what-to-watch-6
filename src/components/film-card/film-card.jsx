@@ -1,13 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
+import PropTypes from 'prop-types';
 
-const FilmCard = () => {
+const FilmCard = (props) => {
+  const {film, id} = props;
+  const [, setActive] = useState(0);
   return (
     <>
-      <article className="small-movie-card catalog__movies-card">
+      <article className="small-movie-card catalog__movies-card" onMouseEnter={() => setActive(id)}>
         <div className="small-movie-card__image">
           <img
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            alt="Fantastic Beasts: The Crimes of Grindelwald"
+            src={film.previewImage}
+            alt={film.name}
             width="280"
             height="175"
           />
@@ -20,6 +23,14 @@ const FilmCard = () => {
       </article>
     </>
   );
+};
+
+FilmCard.propTypes = {
+  film: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+  }),
+  id: PropTypes.number.isRequired
 };
 
 export default FilmCard;

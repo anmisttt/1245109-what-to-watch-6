@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Player = () => {
+const Player = (props) => {
+  const {film} = props;
   return (<React.Fragment>
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><symbol id="add" viewBox="0 0 19 20">
@@ -28,7 +30,7 @@ const Player = () => {
       </symbol></svg>
     </div>
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src="#" className="player__video" poster={film.posterImage}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -60,6 +62,12 @@ const Player = () => {
       </div>
     </div>
   </React.Fragment>);
+};
+
+Player.propTypes = {
+  film: PropTypes.shape({
+    posterImage: PropTypes.string.isRequired,
+  })
 };
 
 export default Player;

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app";
+import films from './mocks/films';
 
 const Setting = {
   FILMINFO: {
@@ -11,6 +12,9 @@ const Setting = {
 };
 
 ReactDOM.render(
-    <App filmInfo={Setting.FILMINFO} />,
+    <App
+      filmInfo={Setting.FILMINFO}
+      films = {films}
+    />,
     document.querySelector(`#root`)
 );
