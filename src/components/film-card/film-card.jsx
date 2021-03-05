@@ -1,12 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 const FilmCard = (props) => {
-  const {film, id} = props;
-  const [, setActive] = useState(0);
+  const {film} = props;
+
   return (
     <>
-      <article className="small-movie-card catalog__movies-card" onMouseEnter={() => setActive(id)}>
+      <article className="small-movie-card catalog__movies-card" onMouseEnter={props.onHover}>
         <div className="small-movie-card__image">
           <img
             src={film.previewImage}
@@ -16,9 +17,9 @@ const FilmCard = (props) => {
           />
         </div>
         <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href="movie-page.html">
+          <Link className="small-movie-card__link" to={(`films/${film.id}`)}>
             Fantastic Beasts: The Crimes of Grindelwald
-          </a>
+          </Link>
         </h3>
       </article>
     </>
@@ -29,8 +30,9 @@ FilmCard.propTypes = {
   film: PropTypes.shape({
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired
   }),
-  id: PropTypes.number.isRequired
+  onHover: PropTypes.func.isRequired
 };
 
 export default FilmCard;
