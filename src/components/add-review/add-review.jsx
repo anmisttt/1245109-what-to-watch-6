@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 const AddReview = (props) => {
   const {film} = props;
-  const [review, setReview] = useState([false, 6]);
+  const [review, setReview] = useState([``, 0]);
   const stars = new Array(10).fill(0);
 
   return (
@@ -77,17 +77,19 @@ const AddReview = (props) => {
         <div className="add-review">
           <form action="#" className="add-review__form">
             <div className="rating">
-              <div className="rating__stars">
+              <div className="rating__stars"
+                onChange={({target}) => {
+                  setReview([review[0], target.value]);
+                }}>
                 {
                   stars.map((star, id) => (
-                    <>
-                      <input className="rating__input" key={id} id={`star-${id + 1}`} type="radio" name="rating" value={`${id + 1}`} checked = {(review[1] === id + 1) ? true : false}
-                        onChange={({target}) => {
-                          setReview([review[0], target.checked]);
-                        }}
+                    <React.Fragment
+                      key={`star-${id + 1}`}>
+                      <input className="rating__input" id={`star-${id + 1}`} type="radio" name="rating" value={`${id + 1}`} checked = {(review[1] === id + 1) ? true : false}
+                        readOnly
                       />
                       <label className="rating__label" htmlFor={`star-${id + 1}`}>{`Rating ${id + 1}`}</label>
-                    </>
+                    </React.Fragment>
                   ))
                 }
 
@@ -97,7 +99,7 @@ const AddReview = (props) => {
             <div className="add-review__text">
               <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
                 onChange={({target}) => {
-                  setReview([review[0], target.checked]);
+                  setReview([target.value, review[1]]);
                 }}
               ></textarea>
               <div className="add-review__submit">
