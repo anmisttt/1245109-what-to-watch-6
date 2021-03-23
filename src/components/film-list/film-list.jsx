@@ -5,13 +5,13 @@ import FilmCard from '../film-card/film-card';
 const FilmList = (props) => {
   const {films, genre} = props;
   const [isActive, setActive] = useState(0);
-  const semilarFilms = (genre) ? films.filter((film) => film.genre === genre) : [];
+  const similarFilms = (genre) ? films.filter((film) => film.genre === genre) : [];
   return (
     <>
       {(!genre) ? films.map((el) => (
         <FilmCard isActive={isActive} key={el.id} film = {el} id={el.id} onHover={()=>setActive(el.id)} unHover={()=>setActive(0)}/>
       )) :
-        semilarFilms.map((el) => (
+        similarFilms.map((el) => (
           <FilmCard isActive={isActive} key={el.id} film = {el} id={el.id} onHover={()=>setActive(el.id)} unHover={()=>setActive(0)}/>
         ))}
     </>
