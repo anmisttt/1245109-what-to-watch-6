@@ -20,7 +20,7 @@ export default [
   },
   {
     "id": 2,
-    "name": `The Grand Budapest Hotel`,
+    "name": `Gentlemen`,
     "posterImage": `img/the-grand-budapest-hotel-poster.jpg`,
     "previewImage": `img/bohemian-rhapsody.jpg`,
     "backgroundImage": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -39,7 +39,7 @@ export default [
   },
   {
     "id": 3,
-    "name": `The Grand Budapest Hotel`,
+    "name": `Home Alone`,
     "posterImage": `img/the-grand-budapest-hotel-poster.jpg`,
     "previewImage": `img/bohemian-rhapsody.jpg`,
     "backgroundImage": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -58,7 +58,7 @@ export default [
   },
   {
     "id": 4,
-    "name": `The Grand Budapest Hotel`,
+    "name": `Green Book`,
     "posterImage": `img/the-grand-budapest-hotel-poster.jpg`,
     "previewImage": `img/bohemian-rhapsody.jpg`,
     "backgroundImage": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -77,7 +77,7 @@ export default [
   },
   {
     "id": 5,
-    "name": `The Grand Budapest Hotel`,
+    "name": `Fight Club`,
     "posterImage": `img/the-grand-budapest-hotel-poster.jpg`,
     "previewImage": `img/bohemian-rhapsody.jpg`,
     "backgroundImage": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -90,13 +90,13 @@ export default [
     "director": `Wes Andreson`,
     "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     "run_time": 99,
-    "genre": `Comedy`,
+    "genre": `Thriller`,
     "released": 2014,
     "is_favorite": false
   },
   {
     "id": 6,
-    "name": `The Grand Budapest Hotel`,
+    "name": `Limitless`,
     "posterImage": `img/the-grand-budapest-hotel-poster.jpg`,
     "previewImage": `img/bohemian-rhapsody.jpg`,
     "backgroundImage": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -109,13 +109,13 @@ export default [
     "director": `Wes Andreson`,
     "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     "run_time": 99,
-    "genre": `Comedy`,
+    "genre": `Thriller`,
     "released": 2014,
     "is_favorite": false
   },
   {
     "id": 7,
-    "name": `The Grand Budapest Hotel`,
+    "name": `Joker`,
     "posterImage": `img/the-grand-budapest-hotel-poster.jpg`,
     "previewImage": `img/bohemian-rhapsody.jpg`,
     "backgroundImage": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -128,13 +128,13 @@ export default [
     "director": `Wes Andreson`,
     "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     "run_time": 99,
-    "genre": `Comedy`,
+    "genre": `Thriller`,
     "released": 2014,
     "is_favorite": false
   },
   {
     "id": 8,
-    "name": `The Grand Budapest Hotel`,
+    "name": `Devil's Advocate`,
     "posterImage": `img/the-grand-budapest-hotel-poster.jpg`,
     "previewImage": `img/bohemian-rhapsody.jpg`,
     "backgroundImage": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -147,7 +147,7 @@ export default [
     "director": `Wes Andreson`,
     "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     "run_time": 99,
-    "genre": `Comedy`,
+    "genre": `Thriller`,
     "released": 2014,
     "is_favorite": false
   }
