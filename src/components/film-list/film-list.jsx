@@ -9,10 +9,18 @@ const FilmList = (props) => {
   return (
     <>
       {(!genre) ? films.map((el) => (
-        <FilmCard isActive={isActive} key={el.id} film = {el} id={el.id} onHover={()=>setActive(el.id)} unHover={()=>setActive(0)}/>
+        <FilmCard isActive={isActive} key={el.id} film = {el} id={el.id} onHover={()=>setTimeout(()=>{
+          setActive(el.id);
+        }, 1000)} unHover={()=>setTimeout(()=>{
+          setActive(0);
+        }, 1000)}/>
       )) :
         semilarFilms.map((el) => (
-          <FilmCard isActive={isActive} key={el.id} film = {el} id={el.id} onHover={()=>setActive(el.id)} unHover={()=>setActive(0)}/>
+          <FilmCard isActive={isActive} key={el.id} film = {el} id={el.id} onHover={()=>setTimeout(()=>{
+            setActive(el.id);
+          }, 1000)} unHover={()=>setTimeout(()=>{
+            setActive(0);
+          }, 1000)}/>
         ))}
     </>
   );
