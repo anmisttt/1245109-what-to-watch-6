@@ -9,7 +9,7 @@ const VideoPlayer = ({src, image}) => {
     <video className="small-movie-card__player"
       src={src} poster={image}
       width="280" height="175"
-      muted={true}/>
+      muted={true} autoPlay={true}/>
 
   );
 };

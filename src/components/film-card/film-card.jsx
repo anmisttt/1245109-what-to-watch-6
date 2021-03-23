@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import VideoPlayer from '../videoplayer/videoplayer';
 
 const FilmCard = (props) => {
-  const {film, id, isActive, onHover} = props;
+  const {film, id, isActive, onHover, unHover} = props;
   return (
     <>
-      <article className="small-movie-card catalog__movies-card" onMouseEnter={onHover}>
+      <article className="small-movie-card catalog__movies-card" onMouseEnter={onHover} onMouseLeave={unHover}>
         <div className="small-movie-card__image">
           {(isActive !== id) && <img src={film.previewImage} alt='film' width="280" height="175"/>}
           {(isActive === id) && (
@@ -37,7 +37,8 @@ FilmCard.propTypes = {
   }),
   id: PropTypes.number.isRequired,
   isActive: PropTypes.number.isRequired,
-  onHover: PropTypes.func.isRequired
+  onHover: PropTypes.func.isRequired,
+  unHover: PropTypes.func.isRequired
 };
 
 export default FilmCard;
