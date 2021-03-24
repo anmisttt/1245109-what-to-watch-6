@@ -8,16 +8,15 @@ const Tabs = () => {
 
   const tabsTitles = [`Overview`, `Details`, `Reviews`];
 
-  function handleClick(e) {
-    e.preventDefault();
-  }
-
   return (<div className="movie-card__desc">
     <nav className="movie-nav movie-card__nav">
       <ul className="movie-nav__list">
         {tabsTitles.map((tab, i) => (
-          <li key={i} className={(activeTab === i) ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`} onClick={() => setActiveTab(i)}>
-            <a href="#" className="movie-nav__link" onClick={handleClick}>{tab}</a>
+          <li key={i} className={(activeTab === i) ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`}>
+            <a href="#" className="movie-nav__link" onClick={(evt)=>{
+              evt.preventDefault();
+              setActiveTab(i);
+            }}>{tab}</a>
           </li>
         ))}
       </ul>
