@@ -9,7 +9,9 @@ const FilmList = (props) => {
   return (
     <>
       {(!genre) ? films.map((el) => (
-        <FilmCard isActive={isActive} key={el.id} film = {el} id={el.id} onHover={()=>setActive(el.id)} unHover={()=>setActive(0)}/>
+        <FilmCard isActive={isActive} key={el.id} film = {el} id={el.id} onHover={()=>setTimeout(()=>{
+          setActive(el.id);
+        }, 1000)} unHover={()=>setActive(0)}/>
       )) :
         similarFilms.map((el) => (
           <FilmCard isActive={isActive} key={el.id} film = {el} id={el.id} onHover={()=>setActive(el.id)} unHover={()=>setActive(0)}/>
