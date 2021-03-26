@@ -8,6 +8,7 @@ import Film from "../film/film";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 import NotFound from "../not-found/not-found";
+import {connect} from 'react-redux';
 
 
 const App = (props) => {
@@ -50,4 +51,10 @@ App.propTypes = {
   films: PropTypes.array.isRequired
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  films: state.films
+});
+
+export {App};
+
+export default connect(mapStateToProps, null)(App);

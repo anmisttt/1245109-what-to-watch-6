@@ -1,6 +1,7 @@
 export const ActionType = {
   CHANGE_GENRE: `films/changeGenre`,
-  SET_FILMS: `films/setFilms`
+  SET_FILMS: `films/setFilms`,
+  INCREASE_VISIBLE_FILMS: `films/increaseVisibleFilms`
 };
 
 export const ActionCreator = {
@@ -10,5 +11,9 @@ export const ActionCreator = {
   }),
   setFilms: () => ({
     type: ActionType.SET_FILMS
+  }),
+  increaseVisibleFilms: () => ({
+    type: ActionType.INCREASE_VISIBLE_FILMS,
+    payload: 8
   })
 };

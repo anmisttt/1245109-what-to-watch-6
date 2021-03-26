@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import FilmList from "../film-list/film-list";
 import GenreList from "../genre-list/genre-list";
 import {connect} from 'react-redux';
+import ShowMore from "../show-more/show-more";
 
 const Main = (props) => {
-  const {filmInfo, films} = props;
+  const {filmInfo, films, visibleFilms} = props;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -90,12 +91,7 @@ const Main = (props) => {
           <div className="catalog__movies-list">
             <FilmList films = {films}></FilmList>
           </div>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
-          </div>
+          {(visibleFilms < films.length) && <ShowMore></ShowMore>}
         </section>
 
         <footer className="page-footer">
@@ -122,11 +118,13 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
   }),
-  films: PropTypes.array.isRequired
+  films: PropTypes.array.isRequired,
+  visibleFilms: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films
+  films: state.films,
+  visibleFilms: state.visibleFilms
 });
 
 
