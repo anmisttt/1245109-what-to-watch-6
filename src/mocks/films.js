@@ -33,7 +33,7 @@ export default [
     "director": `Wes Andreson`,
     "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     "run_time": 99,
-    "genre": `Comedy`,
+    "genre": `Crime`,
     "released": 2014,
     "is_favorite": false
   },
@@ -52,7 +52,7 @@ export default [
     "director": `Wes Andreson`,
     "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     "run_time": 99,
-    "genre": `Comedy`,
+    "genre": `Documentary`,
     "released": 2014,
     "is_favorite": false
   },
@@ -71,7 +71,7 @@ export default [
     "director": `Wes Andreson`,
     "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     "run_time": 99,
-    "genre": `Comedy`,
+    "genre": `Drama`,
     "released": 2014,
     "is_favorite": false
   },
@@ -90,7 +90,7 @@ export default [
     "director": `Wes Andreson`,
     "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     "run_time": 99,
-    "genre": `Thriller`,
+    "genre": `Horror`,
     "released": 2014,
     "is_favorite": false
   },
@@ -109,7 +109,7 @@ export default [
     "director": `Wes Andreson`,
     "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     "run_time": 99,
-    "genre": `Thriller`,
+    "genre": `Kids & Family`,
     "released": 2014,
     "is_favorite": false
   },
@@ -128,12 +128,31 @@ export default [
     "director": `Wes Andreson`,
     "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     "run_time": 99,
-    "genre": `Thriller`,
+    "genre": `Romance`,
     "released": 2014,
     "is_favorite": false
   },
   {
     "id": 8,
+    "name": `Devil's Advocate`,
+    "posterImage": `img/the-grand-budapest-hotel-poster.jpg`,
+    "previewImage": `img/bohemian-rhapsody.jpg`,
+    "backgroundImage": `img/bg-the-grand-budapest-hotel.jpg`,
+    "background_color": `#ffffff`,
+    "video_link": `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    "previewVideoLink": `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    "description": `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+    "rating": 8.9,
+    "scores_count": 240,
+    "director": `Wes Andreson`,
+    "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+    "run_time": 99,
+    "genre": `Sci-Fi`,
+    "released": 2014,
+    "is_favorite": false
+  },
+  {
+    "id": 9,
     "name": `Devil's Advocate`,
     "posterImage": `img/the-grand-budapest-hotel-poster.jpg`,
     "previewImage": `img/bohemian-rhapsody.jpg`,
