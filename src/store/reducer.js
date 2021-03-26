@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
         genre: action.payload
       };
 
-    case ActionType.GET_FILMS:
+    case ActionType.SET_FILMS:
       return {
         ...state,
         films: action.payload

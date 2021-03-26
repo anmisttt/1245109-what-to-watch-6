@@ -9,12 +9,12 @@ const GenreList = (props) => {
   films.forEach((film) => {
     genres.add(film.genre);
   });
-  const [isActive, setActive] = useState(0);
+  const [activeId, setActiveId] = useState(0);
   return (
     <ul className="catalog__genres-list">
       {
         Array.from(genres).map((genre, id) => (
-          <GenreItem isActive={isActive} setActive = {() => setActive(id)} genre={genre} key={id} id={id}></GenreItem>
+          <GenreItem isActive={activeId === id} setActive = {() => setActiveId(id)} genre={genre} key={id}></GenreItem>
         ))
       }
     </ul>

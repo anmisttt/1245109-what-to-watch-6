@@ -1,6 +1,6 @@
 export const ActionType = {
   CHANGE_GENRE: `films/changeGenre`,
-  GET_FILMS: `films/getFilms`
+  SET_FILMS: `films/setFilms`
 };
 
 export const ActionCreator = {
@@ -8,7 +8,7 @@ export const ActionCreator = {
     type: ActionType.CHANGE_GENRE,
     payload: genre
   }),
-  getFilms: () => ({
-    type: ActionType.GET_FILMS
+  setFilms: () => ({
+    type: ActionType.SET_FILMS
   })
 };
