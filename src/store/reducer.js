@@ -4,7 +4,7 @@ import films from '../mocks/films';
 const initialState = {
   genre: `All genres`,
   films,
-  visibleFilms: 8
+  visibleFilmsCount: 8
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,10 +21,15 @@ const reducer = (state = initialState, action) => {
         films: action.payload
       };
 
-    case ActionType.INCREASE_VISIBLE_FILMS:
+    case ActionType.INCREASE_VISIBLE_FILMS_COUNT:
       return {
         ...state,
-        visibleFilms: state.visibleFilms + action.payload
+        visibleFilmsCount: state.visibleFilmsCount + action.payload
+      };
+    case ActionType.RESET_VISIBLE_FILMS_COUNT:
+      return {
+        ...state,
+        visibleFilmsCount: action.payload
       };
     default:
       return state;

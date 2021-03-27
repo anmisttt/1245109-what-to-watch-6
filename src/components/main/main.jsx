@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import ShowMore from "../show-more/show-more";
 
 const Main = (props) => {
-  const {filmInfo, films, visibleFilms} = props;
+  const {filmInfo, films, visibleFilms, visibleFilmsCount} = props;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -89,9 +89,9 @@ const Main = (props) => {
 
           <GenreList films={films}></GenreList>
           <div className="catalog__movies-list">
-            <FilmList films = {films}></FilmList>
+            <FilmList films={visibleFilms}></FilmList>
           </div>
-          {(visibleFilms < films.length) && <ShowMore></ShowMore>}
+          {(visibleFilmsCount < visibleFilms.length) && (visibleFilms.length >= 8) && <ShowMore></ShowMore>}
         </section>
 
         <footer className="page-footer">
@@ -119,12 +119,14 @@ Main.propTypes = {
     year: PropTypes.number.isRequired,
   }),
   films: PropTypes.array.isRequired,
-  visibleFilms: PropTypes.number.isRequired
+  visibleFilms: PropTypes.array.isRequired,
+  visibleFilmsCount: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
   films: state.films,
-  visibleFilms: state.visibleFilms
+  visibleFilms: (state.genre === `All genres`) ? state.films : state.films.filter((film)=> film.genre === state.genre),
+  visibleFilmsCount: state.visibleFilmsCount
 });
 
 
