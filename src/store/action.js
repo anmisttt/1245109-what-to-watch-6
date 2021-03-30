@@ -2,7 +2,8 @@ export const ActionType = {
   CHANGE_GENRE: `films/changeGenre`,
   SET_FILMS: `films/setFilms`,
   INCREASE_VISIBLE_FILMS_COUNT: `films/increasevisibleFilmsCount`,
-  RESET_VISIBLE_FILMS_COUNT: `films/resetvisibleFilmsCount`
+  RESET_VISIBLE_FILMS_COUNT: `films/resetvisibleFilmsCount`,
+  LOAD_FILMS: `data/loadFilms`
 };
 
 export const ActionCreator = {
@@ -20,5 +21,9 @@ export const ActionCreator = {
   resetvisibleFilmsCount: () => ({
     type: ActionType.RESET_VISIBLE_FILMS_COUNT,
     payload: 8
+  }),
+  loadFilms: (films) => ({
+    type: ActionType.LOAD_FILMS,
+    payload: films
   })
 };

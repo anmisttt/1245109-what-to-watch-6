@@ -1398,7 +1398,7 @@ main {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%); }
 
-.not-found {
+.not-found, .loading-screen {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -1409,7 +1409,7 @@ main {
 }
 
 
-.not-found .number {
+.not-found .number, .loading-screen p {
   margin-bottom: 20px;
   font-family: "Arial Black",sans-serif;
   font-size: 50px;
@@ -1436,3 +1436,5 @@ main {
 .not-found .main-return:hover {
   border-color: rgba(217,202,116,.5);
 }
+
+
