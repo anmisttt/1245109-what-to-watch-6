@@ -4,7 +4,8 @@ const initialState = {
   genre: `All genres`,
   films: [],
   visibleFilmsCount: 8,
-  isDataLoaded: false
+  isDataLoaded: false,
+  authorizationStatus: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,13 +15,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         genre: action.payload
       };
-
-    case ActionType.SET_FILMS:
-      return {
-        ...state,
-        films: action.payload
-      };
-
     case ActionType.INCREASE_VISIBLE_FILMS_COUNT:
       return {
         ...state,
@@ -36,6 +30,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         films: action.payload,
         isDataLoaded: true
+      };
+    case ActionType.CHECK_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload
       };
     default:
       return state;
