@@ -11,6 +11,7 @@ import NotFound from "../not-found/not-found";
 import {connect} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchFilmsList} from '../../store/api-actions';
+import PrivateRoute from '../private-route/private-route';
 
 
 const App = (props) => {
@@ -32,15 +33,17 @@ const App = (props) => {
           <Route exact path="/login">
             <SignIn/>
           </Route>
-          <Route exact path="/mylist">
-            <MyList films={films}></MyList>
-          </Route>
+          <PrivateRoute exact
+            path="/mylist"
+            render={()=><MyList films={films}/>}>
+          </PrivateRoute>
           <Route exact path="/films/:id">
             <Film currentFilm={films[0]} films={films}></Film>
           </Route>
-          <Route exact path="/films/:id/review">
-            <AddReview film={films[0]}/>
-          </Route>
+          <PrivateRoute exact
+            path="/films/:id/review"
+            render={()=><AddReview film={films[0]}/>}>
+          </PrivateRoute>
           <Route exact path="/player/:id">
             <Player film={films[0]}/>
           </Route>

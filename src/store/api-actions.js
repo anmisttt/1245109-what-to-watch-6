@@ -9,11 +9,11 @@ export const fetchFilmsList = () => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
-  .then(() => dispatch(ActionCreator.requireAuthorization(true)))
+  .then(() => dispatch(ActionCreator.checkAuthorization(true)))
   .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
-    .then(() => dispatch(ActionCreator.requireAuthorization(true)))
+    .then(() => dispatch(ActionCreator.checkAuthorization(true)))
 );
