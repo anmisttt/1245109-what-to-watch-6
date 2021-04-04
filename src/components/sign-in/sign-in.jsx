@@ -2,10 +2,13 @@ import React, {useRef} from 'react';
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
 
 const SignIn = ({onSubmit}) => {
   const loginRef = useRef();
   const passwordRef = useRef();
+
+  const history = useHistory();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -14,6 +17,8 @@ const SignIn = ({onSubmit}) => {
       login: loginRef.current.value,
       password: passwordRef.current.value,
     });
+
+    history.push(`/`);
   };
   return (
     <React.Fragment>

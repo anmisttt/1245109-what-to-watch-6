@@ -7,7 +7,8 @@ import {reducer} from './store/reducer';
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from 'redux-thunk';
 import {createAPI} from "./services/api";
-import {ActionCreator} from './store/action';
+import {checkAuth} from './store/api-actions';
+import {ActionCreator} from "./store/action";
 
 const Setting = {
   FILMINFO: {
@@ -27,6 +28,8 @@ const store = createStore(
         applyMiddleware(thunk.withExtraArgument(api))
     )
 );
+
+store.dispatch(checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>

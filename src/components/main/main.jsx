@@ -4,9 +4,13 @@ import FilmList from "../film-list/film-list";
 import GenreList from "../genre-list/genre-list";
 import {connect} from 'react-redux';
 import ShowMore from "../show-more/show-more";
+import {useHistory} from 'react-router-dom';
 
 const Main = (props) => {
-  const {filmInfo, films, visibleFilms, visibleFilmsCount} = props;
+  const {filmInfo, films, visibleFilms, visibleFilmsCount, authorizationStatus} = props;
+
+  const history = useHistory();
+
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -29,14 +33,19 @@ const Main = (props) => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
+            {authorizationStatus ? <div className="user-block__avatar">
               <img
                 src="img/avatar.jpg"
                 alt="User avatar"
                 width="63"
                 height="63"
-              />
-            </div>
+              /></div> :
+              <a href="#" className="catalog__genres-link" onClick={(evt) => {
+                evt.preventDefault();
+                history.push(`/login`);
+              }}>
+                Sign in</a>
+            }
           </div>
         </header>
 
@@ -120,13 +129,15 @@ Main.propTypes = {
   }),
   films: PropTypes.array.isRequired,
   visibleFilms: PropTypes.array.isRequired,
-  visibleFilmsCount: PropTypes.number.isRequired
+  visibleFilmsCount: PropTypes.number.isRequired,
+  authorizationStatus: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
   films: state.films,
   visibleFilms: (state.genre === `All genres`) ? state.films : state.films.filter((film)=> film.genre === state.genre),
-  visibleFilmsCount: state.visibleFilmsCount
+  visibleFilmsCount: state.visibleFilmsCount,
+  authorizationStatus: state.authorizationStatus
 });
 
 
