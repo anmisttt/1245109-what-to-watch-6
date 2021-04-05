@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import MyList from "../my-list/my-list";
@@ -12,6 +12,7 @@ import {connect} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchFilmsList} from '../../store/api-actions';
 import PrivateRoute from '../private-route/private-route';
+import browserHistory from '../../browser-history';
 
 
 const App = (props) => {
@@ -25,14 +26,17 @@ const App = (props) => {
 
   return (
     (isDataLoaded) ?
-      <BrowserRouter>
+      <BrowserRouter history={browserHistory}>
         <Switch>
-          <Route exact path="/">
-            <Main filmInfo={filmInfo} films={films}></Main>;
-          </Route>
-          <Route exact path="/login">
-            <SignIn/>
-          </Route>
+          <Route exact path="/" render={({history}) => (
+            <Main filmInfo={filmInfo} films={films} onLoginButtonClick={() => history.push(`/login`)}></Main>
+          )}/>
+          <Route exact path="/login"
+            render={({history}) => (
+              <SignIn
+                onSubmitButtonClick={() => history.push(`/`)}
+              />
+            )}/>
           <PrivateRoute exact
             path="/mylist"
             render={()=><MyList films={films}/>}>

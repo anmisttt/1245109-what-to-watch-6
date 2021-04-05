@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import {createAPI} from "./services/api";
 import {checkAuth} from './store/api-actions';
 import {ActionCreator} from "./store/action";
+import {redirect} from "./store/middlewares/redirect";
 
 const Setting = {
   FILMINFO: {
@@ -19,13 +20,14 @@ const Setting = {
 };
 
 const api = createAPI(
-    () => store.dispatch(ActionCreator.checkAuthorization(false))
+    () => store.dispatch(ActionCreator.changeAuthorization(false))
 );
 
 const store = createStore(
     reducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
 

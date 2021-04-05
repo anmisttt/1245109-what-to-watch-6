@@ -3,6 +3,7 @@ import {ActionType} from './action';
 const initialState = {
   genre: `All genres`,
   films: [],
+  activeFilmId: 0,
   visibleFilmsCount: 8,
   isDataLoaded: false,
   authorizationStatus: false
@@ -31,10 +32,15 @@ const reducer = (state = initialState, action) => {
         films: action.payload,
         isDataLoaded: true
       };
-    case ActionType.CHECK_AUTHORIZATION:
+    case ActionType.CHANGE_AUTHORIZATION:
       return {
         ...state,
         authorizationStatus: action.payload
+      };
+    case ActionType.CHANGE_ACTIVE_FILM:
+      return {
+        ...state,
+        activeFilmId: action.payload
       };
     default:
       return state;

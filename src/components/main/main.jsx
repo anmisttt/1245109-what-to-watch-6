@@ -4,12 +4,10 @@ import FilmList from "../film-list/film-list";
 import GenreList from "../genre-list/genre-list";
 import {connect} from 'react-redux';
 import ShowMore from "../show-more/show-more";
-import {useHistory} from 'react-router-dom';
+import {logout} from '../../store/api-actions';
 
 const Main = (props) => {
-  const {filmInfo, films, visibleFilms, visibleFilmsCount, authorizationStatus} = props;
-
-  const history = useHistory();
+  const {filmInfo, films, visibleFilms, visibleFilmsCount, authorizationStatus, onLoginButtonClick, onLogoutButtonClick} = props;
 
   return (
     <React.Fragment>
@@ -33,7 +31,7 @@ const Main = (props) => {
           </div>
 
           <div className="user-block">
-            {authorizationStatus ? <div className="user-block__avatar">
+            {authorizationStatus ? <div className="user-block__avatar" onClick={() => onLogoutButtonClick()}>
               <img
                 src="img/avatar.jpg"
                 alt="User avatar"
@@ -42,7 +40,7 @@ const Main = (props) => {
               /></div> :
               <a href="#" className="catalog__genres-link" onClick={(evt) => {
                 evt.preventDefault();
-                history.push(`/login`);
+                onLoginButtonClick();
               }}>
                 Sign in</a>
             }
@@ -130,7 +128,9 @@ Main.propTypes = {
   films: PropTypes.array.isRequired,
   visibleFilms: PropTypes.array.isRequired,
   visibleFilmsCount: PropTypes.number.isRequired,
-  authorizationStatus: PropTypes.bool.isRequired
+  authorizationStatus: PropTypes.bool.isRequired,
+  onLoginButtonClick: PropTypes.func.isRequired,
+  onLogoutButtonClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -140,8 +140,14 @@ const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onLogoutButtonClick() {
+    dispatch(logout());
+  }
+});
+
 
 export {Main};
 
-export default connect(mapStateToProps, null)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
 
