@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
@@ -8,6 +8,8 @@ import {useParams} from 'react-router-dom';
 const AddReview = (props) => {
   const {currentFilm, isCurrentFilmLoaded, getCurrentFilm, onSubmit} = props;
 
+  const [isActive, setActive] = useState(false);
+
   const filmId = useParams().id;
 
   const ratingRef = useRef();
@@ -16,10 +18,12 @@ const AddReview = (props) => {
   const handlePost = (evt) => {
     evt.preventDefault();
 
+
     onSubmit({
-      login: ratingRef.current.value,
-      password: commentRef.current.value,
-    });
+      rating: ratingRef.current.rating.value,
+      comment: commentRef.current.value,
+    }, filmId);
+
 
   };
 
@@ -100,9 +104,9 @@ const AddReview = (props) => {
           </div>
 
           <div className="add-review">
-            <form action="#" className="add-review__form">
+            <form action="#" className="add-review__form" onSubmit = {(isActive) ? handlePost : (evt) => evt.preventDefault()} ref={ratingRef}>
               <div className="rating">
-                <div className="rating__stars" ref={ratingRef}>
+                <div className="rating__stars">
                   <input className="rating__input" id="star-1" type="radio" name="rating" value="1"/>
                   <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
@@ -136,9 +140,15 @@ const AddReview = (props) => {
               </div>
 
               <div className="add-review__text">
-                <textarea ref = {commentRef} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+                <textarea ref = {commentRef} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange = {() => {
+                  if ((commentRef.current.value.length > 50) && ((commentRef.current.value.length < 400))) {
+                    setActive(true);
+                  } else {
+                    setActive(false);
+                  }
+                }}></textarea>
                 <div className="add-review__submit">
-                  <button className="add-review__btn" type="submit" onSubmit = {() => handlePost}>Post</button>
+                  <button className="add-review__btn" type="submit">Post</button>
                 </div>
 
               </div>

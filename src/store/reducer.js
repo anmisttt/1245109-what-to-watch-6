@@ -3,12 +3,14 @@ import {ActionType} from './action';
 const initialState = {
   genre: `All genres`,
   films: [],
+  comments: [],
+  currentFilm: {},
   activeFilmId: 0,
   visibleFilmsCount: 8,
   isDataLoaded: false,
   authorizationStatus: false,
-  currentFilm: {},
-  isCurrentFilmLoaded: false
+  isCurrentFilmLoaded: false,
+  isCommentsLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,6 +41,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         currentFilm: action.payload,
         isCurrentFilmLoaded: true
+      };
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload,
+        isCommentsLoaded: true
       };
     case ActionType.CHANGE_AUTHORIZATION:
       return {

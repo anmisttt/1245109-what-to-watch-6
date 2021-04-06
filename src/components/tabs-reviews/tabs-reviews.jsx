@@ -1,92 +1,68 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {fetchComments} from '../../store/api-actions';
+import PropTypes from 'prop-types';
+import {useParams} from 'react-router-dom';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-const TabsReviews = () => {
+const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
+
+  const filmId = useParams().id;
+
+  const monthNames = [`January`, `February`, `March`, `April`, `May`, `June`,
+    `July`, `August`, `September`, `October`, `November`, `December`
+  ];
+
+  useEffect(() => {
+    if (!isCommentsLoaded) {
+      getCommnets(filmId);
+    }
+  }, [isCommentsLoaded]);
+
   return (
-    <>
-      <div className="movie-card__reviews movie-card__row">
-        <div className="movie-card__reviews-col">
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the directors funniest and most exquisitely designed movies in years.</p>
+    (isCommentsLoaded) ?
+      <React.Fragment>
+        <div className="movie-card__reviews movie-card__row">
+          <div className="movie-card__reviews-col">
+            {comments.map((comment) =>
+              <div className="review" key={comment.id}>
+                <blockquote className="review__quote">
+                  <p className="review__text">{comment.comment}</p>
 
-              <footer className="review__details">
-                <cite className="review__author">Kate Muir</cite>
-                <time className="review__date" dateTime="2016-12-24">December 24, 2016</time>
-              </footer>
-            </blockquote>
+                  <footer className="review__details">
+                    <cite className="review__author">{comment.user.name}</cite>
+                    <time className="review__date" dateTime={comment.date}>{monthNames[comment.date.getMonth()]} {comment.date.getDate()}, {comment.date.getFullYear()}</time>
+                  </footer>
+                </blockquote>
 
-            <div className="review__rating">8,9</div>
-          </div>
-
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">Andersons films are too precious for some, but for those of us willing to lose ourselves in them, theyre a delight. The Grand Budapest Hotel is no different, except that he has added a hint of gravitas to the mix, improving the recipe.</p>
-
-              <footer className="review__details">
-                <cite className="review__author">Bill Goodykoontz</cite>
-                <time className="review__date" dateTime="2015-11-18">November 18, 2015</time>
-              </footer>
-            </blockquote>
-
-            <div className="review__rating">8,0</div>
-          </div>
-
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">I didnt find it amusing, and while I can appreciate the creativity, its an hour and 40 minutes I wish I could take back.</p>
-
-              <footer className="review__details">
-                <cite className="review__author">Amanda Greever</cite>
-                <time className="review__date" dateTime="2015-11-18">November 18, 2015</time>
-              </footer>
-            </blockquote>
-
-            <div className="review__rating">8,0</div>
+                <div className="review__rating">{comment.rating}</div>
+              </div>)}
           </div>
         </div>
-        <div className="movie-card__reviews-col">
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.</p>
 
-              <footer className="review__details">
-                <cite className="review__author">Matthew Lickona</cite>
-                <time className="review__date" dateTime="2016-12-20">December 20, 2016</time>
-              </footer>
-            </blockquote>
-
-            <div className="review__rating">7,2</div>
-          </div>
-
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.</p>
-
-              <footer className="review__details">
-                <cite className="review__author">Paula Fleri-Soler</cite>
-                <time className="review__date" dateTime="2016-12-20">December 20, 2016</time>
-              </footer>
-            </blockquote>
-
-            <div className="review__rating">7,6</div>
-          </div>
-
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.</p>
-
-              <footer className="review__details">
-                <cite className="review__author">Paula Fleri-Soler</cite>
-                <time className="review__date" dateTime="2016-12-20">December 20, 2016</time>
-              </footer>
-            </blockquote>
-
-            <div className="review__rating">7,0</div>
-          </div>
-        </div>
-      </div>
-    </>
+      </React.Fragment>
+      :
+      <LoadingScreen></LoadingScreen>
   );
 };
 
-export default TabsReviews;
+TabsReviews.propTypes = {
+  comments: PropTypes.array.isRequired,
+  isCommentsLoaded: PropTypes.bool.isRequired,
+  getCommnets: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  comments: state.comments,
+  isCommentsLoaded: state.isCommentsLoaded
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getCommnets(filmId) {
+    dispatch(fetchComments(filmId));
+  }
+});
+
+export {TabsReviews};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabsReviews);
