@@ -2,14 +2,12 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import FilmCard from '../film-card/film-card';
 import {connect} from 'react-redux';
-import {useHistory} from 'react-router-dom';
 import {ActionCreator} from '../../store/action';
 
 const FilmList = (props) => {
-  const {films, genre, visibleFilmsCount, changeActiveFilm} = props;
+  const {films, genre, visibleFilmsCount, redirectToActiveFilm} = props;
   const [isActive, setActive] = useState(0);
   const similarFilms = (genre) ? films.filter((film) => film.genre === genre) : [];
-  const history = useHistory();
   return (
     <>
       {(!genre) ? films.slice(0, visibleFilmsCount).map((el) => (
@@ -19,8 +17,7 @@ const FilmList = (props) => {
           }, 1000)}
           unHover={()=>setActive(0)}
           handleClick={() => {
-            history.push(`/films/${el.id}`);
-            changeActiveFilm(el.id);
+            redirectToActiveFilm(`films/${el.id}`);
           }}
         />
       )) :
@@ -29,8 +26,7 @@ const FilmList = (props) => {
             onHover={()=>setActive(el.id)}
             unHover={()=>setActive(0)}
             handleClick={() => {
-              changeActiveFilm(el.id);
-              history.push(`/films/${el.id}`);
+              redirectToActiveFilm(`${el.id}`);
             }}/>
         ))}
     </>
@@ -41,8 +37,8 @@ FilmList.propTypes = {
   films: PropTypes.array.isRequired,
   genre: PropTypes.string,
   visibleFilmsCount: PropTypes.number.isRequired,
-  changeActiveFilm: PropTypes.func.isRequired,
-  activeFilmId: PropTypes.number.isRequired
+  activeFilmId: PropTypes.number.isRequired,
+  redirectToActiveFilm: PropTypes.func.isRequired
 
 };
 
@@ -52,8 +48,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveFilm(activeFilmId) {
-    dispatch(ActionCreator.changeActiveFilm(activeFilmId));
+  redirectToActiveFilm(url) {
+    dispatch(ActionCreator.redirectToRoute(url));
   }
 });
 
