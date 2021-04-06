@@ -31,18 +31,13 @@ const App = (props) => {
           <Route exact path="/" render={({history}) => (
             <Main filmInfo={filmInfo} films={films} onLoginButtonClick={() => history.push(`/login`)}></Main>
           )}/>
-          <Route exact path="/login"
-            render={({history}) => (
-              <SignIn
-                onSubmitButtonClick={() => history.push(`/`)}
-              />
-            )}/>
+          <Route exact path="/login"> <SignIn/></Route>
           <PrivateRoute exact
             path="/mylist"
             render={()=><MyList films={films}/>}>
           </PrivateRoute>
           <Route exact path="/films/:id">
-            <Film currentFilm={films[0]} films={films}></Film>
+            <Film></Film>
           </Route>
           <PrivateRoute exact
             path="/films/:id/review"

@@ -3,6 +3,7 @@ export const ActionType = {
   INCREASE_VISIBLE_FILMS_COUNT: `films/increasevisibleFilmsCount`,
   RESET_VISIBLE_FILMS_COUNT: `films/resetvisibleFilmsCount`,
   LOAD_FILMS: `data/loadFilms`,
+  LOAD_FILM: `data/loadFilm`,
   CHANGE_AUTHORIZATION: `user/changeAuthorization`,
   REDIRECT_TO_ROUTE: `film/redirectToRoute`,
   CHANGE_ACTIVE_FILM: `film/changeActiveFilm`
@@ -24,6 +25,10 @@ export const ActionCreator = {
   loadFilms: (films) => ({
     type: ActionType.LOAD_FILMS,
     payload: films
+  }),
+  loadFilm: (film) => ({
+    type: ActionType.LOAD_FILM,
+    payload: film
   }),
   changeAuthorization: (isAuthorized) => ({
     type: ActionType.CHANGE_AUTHORIZATION,

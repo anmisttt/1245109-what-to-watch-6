@@ -4,10 +4,10 @@ import FilmList from "../film-list/film-list";
 import GenreList from "../genre-list/genre-list";
 import {connect} from 'react-redux';
 import ShowMore from "../show-more/show-more";
-import {logout} from '../../store/api-actions';
+import Header from "../header/header";
 
 const Main = (props) => {
-  const {filmInfo, films, visibleFilms, visibleFilmsCount, authorizationStatus, onLoginButtonClick, onLogoutButtonClick} = props;
+  const {filmInfo, films, visibleFilms, visibleFilmsCount} = props;
 
   return (
     <React.Fragment>
@@ -21,31 +21,7 @@ const Main = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            {authorizationStatus ? <div className="user-block__avatar" onClick={() => onLogoutButtonClick()}>
-              <img
-                src="img/avatar.jpg"
-                alt="User avatar"
-                width="63"
-                height="63"
-              /></div> :
-              <a href="#" className="catalog__genres-link" onClick={(evt) => {
-                evt.preventDefault();
-                onLoginButtonClick();
-              }}>
-                Sign in</a>
-            }
-          </div>
-        </header>
+        <Header></Header>
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -127,27 +103,17 @@ Main.propTypes = {
   }),
   films: PropTypes.array.isRequired,
   visibleFilms: PropTypes.array.isRequired,
-  visibleFilmsCount: PropTypes.number.isRequired,
-  authorizationStatus: PropTypes.bool.isRequired,
-  onLoginButtonClick: PropTypes.func.isRequired,
-  onLogoutButtonClick: PropTypes.func.isRequired
+  visibleFilmsCount: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
   films: state.films,
   visibleFilms: (state.genre === `All genres`) ? state.films : state.films.filter((film)=> film.genre === state.genre),
-  visibleFilmsCount: state.visibleFilmsCount,
-  authorizationStatus: state.authorizationStatus
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLogoutButtonClick() {
-    dispatch(logout());
-  }
+  visibleFilmsCount: state.visibleFilmsCount
 });
 
 
 export {Main};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, null)(Main);
 

@@ -6,7 +6,9 @@ const initialState = {
   activeFilmId: 0,
   visibleFilmsCount: 8,
   isDataLoaded: false,
-  authorizationStatus: false
+  authorizationStatus: false,
+  currentFilm: {},
+  isCurrentFilmLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -31,6 +33,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         films: action.payload,
         isDataLoaded: true
+      };
+    case ActionType.LOAD_FILM:
+      return {
+        ...state,
+        currentFilm: action.payload,
+        isCurrentFilmLoaded: true
       };
     case ActionType.CHANGE_AUTHORIZATION:
       return {

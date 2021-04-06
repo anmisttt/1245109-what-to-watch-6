@@ -2,8 +2,9 @@ import React, {useRef} from 'react';
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
 import PropTypes from 'prop-types';
+import Logo from '../logo/logo';
 
-const SignIn = ({onSubmit, onSubmitButtonClick, authorizationStatus}) => {
+const SignIn = ({onSubmit}) => {
   const loginRef = useRef();
   const passwordRef = useRef();
 
@@ -15,9 +16,6 @@ const SignIn = ({onSubmit, onSubmitButtonClick, authorizationStatus}) => {
       password: passwordRef.current.value,
     });
 
-    if (authorizationStatus) {
-      onSubmitButtonClick();
-    }
   };
   return (
     <React.Fragment>
@@ -48,13 +46,7 @@ const SignIn = ({onSubmit, onSubmitButtonClick, authorizationStatus}) => {
       </div>
       <div className="user-page">
         <header className="page-header user-page__head">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo></Logo>
 
           <h1 className="page-title user-page__title">Sign in</h1>
         </header>
@@ -77,14 +69,7 @@ const SignIn = ({onSubmit, onSubmitButtonClick, authorizationStatus}) => {
           </form>
         </div>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+        <footer className="page-footer"><Logo footer={true}/>
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
@@ -96,9 +81,7 @@ const SignIn = ({onSubmit, onSubmitButtonClick, authorizationStatus}) => {
 };
 
 SignIn.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onSubmitButtonClick: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.bool.isRequired
+  onSubmit: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
