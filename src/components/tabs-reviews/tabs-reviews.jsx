@@ -20,7 +20,7 @@ const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
   }, [isCommentsLoaded]);
 
   return (
-    ((isCommentsLoaded) && (comments.length > 0)) &&
+    ((isCommentsLoaded) && (comments.length > 0)) ?
       <React.Fragment>
         <div className="movie-card__reviews movie-card__row">
           <div className="movie-card__reviews-col">
@@ -41,7 +41,8 @@ const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
           </div>
         </div>
 
-      </React.Fragment>
+      </React.Fragment> :
+      <p className="movie-card__text">No reviews</p>
   );
 };
 
