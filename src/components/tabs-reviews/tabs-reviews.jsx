@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {fetchComments} from '../../store/api-actions';
 import PropTypes from 'prop-types';
 import {useParams} from 'react-router-dom';
-import LoadingScreen from '../loading-screen/loading-screen';
 
 const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
 
@@ -13,6 +12,7 @@ const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
     `July`, `August`, `September`, `October`, `November`, `December`
   ];
 
+
   useEffect(() => {
     if (!isCommentsLoaded) {
       getCommnets(filmId);
@@ -20,7 +20,7 @@ const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
   }, [isCommentsLoaded]);
 
   return (
-    (isCommentsLoaded) ?
+    ((isCommentsLoaded) && (comments.length > 0)) &&
       <React.Fragment>
         <div className="movie-card__reviews movie-card__row">
           <div className="movie-card__reviews-col">
@@ -29,10 +29,11 @@ const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
                 <blockquote className="review__quote">
                   <p className="review__text">{comment.comment}</p>
 
-                  <footer className="review__details">
+                  {(typeof comment[`date`] !== `undefined`) && <footer className="review__details">
                     <cite className="review__author">{comment.user.name}</cite>
-                    <time className="review__date" dateTime={comment.date}>{monthNames[comment.date.getMonth()]} {comment.date.getDate()}, {comment.date.getFullYear()}</time>
-                  </footer>
+                    <time className="review__date" dateTime={comment.date}>{monthNames[new Date(comment.date).getMonth()]} {new Date(comment.date).getDate()}, {new Date(comment.date).getFullYear()}</time>
+                  </footer>}
+
                 </blockquote>
 
                 <div className="review__rating">{comment.rating}</div>
@@ -41,8 +42,6 @@ const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
         </div>
 
       </React.Fragment>
-      :
-      <LoadingScreen></LoadingScreen>
   );
 };
 

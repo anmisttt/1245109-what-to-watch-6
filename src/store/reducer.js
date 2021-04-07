@@ -58,6 +58,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         activeFilmId: action.payload
       };
+    case ActionType.RESET_CURRENT_FILM:
+      return {
+        ...state,
+        isCurrentFilmLoaded: false
+      };
     default:
       return state;
   }

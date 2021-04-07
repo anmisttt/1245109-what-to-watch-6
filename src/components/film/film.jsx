@@ -19,7 +19,7 @@ const Film = (props) => {
     if (!isCurrentFilmLoaded) {
       getCurrentFilm(filmId);
     }
-  }, [isCurrentFilmLoaded]);
+  }, [isCurrentFilmLoaded, filmId]);
 
   return (
     (isCurrentFilmLoaded) ?

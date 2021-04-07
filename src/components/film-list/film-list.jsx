@@ -5,9 +5,13 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 
 const FilmList = (props) => {
-  const {films, genre, visibleFilmsCount, redirectToActiveFilm} = props;
+  const {films, genre, visibleFilmsCount, redirectToActiveFilm, resetCurrentFilm} = props;
   const [isActive, setActive] = useState(0);
   const similarFilms = (genre) ? films.filter((film) => film.genre === genre) : [];
+  const clickHandler = (url) => {
+    resetCurrentFilm();
+    redirectToActiveFilm(url);
+  };
   return (
     <>
       {(!genre) ? films.slice(0, visibleFilmsCount).map((el) => (
@@ -17,7 +21,7 @@ const FilmList = (props) => {
           }, 1000)}
           unHover={()=>setActive(0)}
           handleClick={() => {
-            redirectToActiveFilm(`films/${el.id}`);
+            clickHandler(`films/${el.id}`);
           }}
         />
       )) :
@@ -26,7 +30,7 @@ const FilmList = (props) => {
             onHover={()=>setActive(el.id)}
             unHover={()=>setActive(0)}
             handleClick={() => {
-              redirectToActiveFilm(`${el.id}`);
+              clickHandler(`${el.id}`);
             }}/>
         ))}
     </>
@@ -38,8 +42,8 @@ FilmList.propTypes = {
   genre: PropTypes.string,
   visibleFilmsCount: PropTypes.number.isRequired,
   activeFilmId: PropTypes.number.isRequired,
-  redirectToActiveFilm: PropTypes.func.isRequired
-
+  redirectToActiveFilm: PropTypes.func.isRequired,
+  resetCurrentFilm: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -50,7 +54,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   redirectToActiveFilm(url) {
     dispatch(ActionCreator.redirectToRoute(url));
+  },
+  resetCurrentFilm() {
+    dispatch(ActionCreator.resetCurrentFilm());
   }
+
 });
 
 export {FilmList};

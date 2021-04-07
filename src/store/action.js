@@ -7,7 +7,8 @@ export const ActionType = {
   LOAD_COMMENTS: `data/loadComments`,
   CHANGE_AUTHORIZATION: `user/changeAuthorization`,
   REDIRECT_TO_ROUTE: `film/redirectToRoute`,
-  CHANGE_ACTIVE_FILM: `film/changeActiveFilm`
+  CHANGE_ACTIVE_FILM: `film/changeActiveFilm`,
+  RESET_CURRENT_FILM: `film/resetCurrentFilm`
 };
 
 export const ActionCreator = {
@@ -46,5 +47,8 @@ export const ActionCreator = {
   changeActiveFilm: (activeFilmId) => ({
     type: ActionType.CHANGE_ACTIVE_FILM,
     payload: activeFilmId
+  }),
+  resetCurrentFilm: () => ({
+    type: ActionType.RESET_CURRENT_FILM
   })
 };

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchFilm, postComment} from '../../store/api-actions';
 import {useParams} from 'react-router-dom';
+import Header from '../header/header';
 
 const AddReview = (props) => {
   const {currentFilm, isCurrentFilmLoaded, getCurrentFilm, onSubmit} = props;
@@ -71,32 +72,7 @@ const AddReview = (props) => {
 
             <h1 className="visually-hidden">WTW</h1>
 
-            <header className="page-header">
-              <div className="logo">
-                <a href="main.html" className="logo__link">
-                  <span className="logo__letter logo__letter--1">W</span>
-                  <span className="logo__letter logo__letter--2">T</span>
-                  <span className="logo__letter logo__letter--3">W</span>
-                </a>
-              </div>
-
-              <nav className="breadcrumbs">
-                <ul className="breadcrumbs__list">
-                  <li className="breadcrumbs__item">
-                    <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
-                  </li>
-                  <li className="breadcrumbs__item">
-                    <a className="breadcrumbs__link">Add review</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="user-block">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </div>
-            </header>
+            <Header></Header>
 
             <div className="movie-card__poster movie-card__poster--small">
               <img src={currentFilm.posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
@@ -104,7 +80,7 @@ const AddReview = (props) => {
           </div>
 
           <div className="add-review">
-            <form action="#" className="add-review__form" onSubmit = {(isActive) ? handlePost : (evt) => evt.preventDefault()} ref={ratingRef}>
+            <form action="#" className="add-review__form" onSubmit = {handlePost} ref={ratingRef}>
               <div className="rating">
                 <div className="rating__stars">
                   <input className="rating__input" id="star-1" type="radio" name="rating" value="1"/>
@@ -148,7 +124,10 @@ const AddReview = (props) => {
                   }
                 }}></textarea>
                 <div className="add-review__submit">
-                  <button className="add-review__btn" type="submit">Post</button>
+                  {isActive ?
+                    <button className="add-review__btn" type="submit">Post</button> :
+                    <button className="add-review__btn" type="submit" disabled>Post</button>
+                  }
                 </div>
 
               </div>
