@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import FilmCard from '../film-card/film-card';
 import {connect} from 'react-redux';
 import {redirectToRoute, resetCurrentFilm} from '../../store/action';
+import {getVisibleFilmsCount} from '../../store/films/selectors';
+import {getActiveFilmId} from '../../store/films/selectors';
 
 const FilmList = (props) => {
   const {films, genre, visibleFilmsCount, redirectToActiveFilm, resetFilm} = props;
@@ -47,8 +49,8 @@ FilmList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  visibleFilmsCount: state.visibleFilmsCount,
-  activeFilmId: state.activeFilmId
+  visibleFilmsCount: getVisibleFilmsCount(state),
+  activeFilmId: getActiveFilmId(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

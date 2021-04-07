@@ -1,4 +1,4 @@
-import {loadFilms, loadFilm, redirectToRoute, loadComments, changeAuthorization} from './action';
+import {loadFilms, loadCurrentFilm, loadPromoFilm, redirectToRoute, loadComments, changeAuthorization} from './action';
 import getAdaptedFilm from '../services/adapter';
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
@@ -8,11 +8,18 @@ export const fetchFilmsList = () => (dispatch, _getState, api) => (
     .catch(() => {})
 );
 
-export const fetchFilm = (filmId) => (dispatch, _getState, api) => (
+export const fetchCurrentFilm = (filmId) => (dispatch, _getState, api) => (
   api.get(`/films/${filmId}`)
   .then((response) => getAdaptedFilm(response.data))
-  .then((data) => (dispatch(loadFilm(data))))
+  .then((data) => (dispatch(loadCurrentFilm(data))))
   .catch(() => dispatch(redirectToRoute(`/404`)))
+);
+
+export const fetchPromoFilm = () => (dispatch, _getState, api) => (
+  api.get(`/films/promo`)
+  .then((response) => getAdaptedFilm(response.data))
+  .then((data) => (dispatch(loadPromoFilm(data))))
+  .catch(() => {})
 );
 
 export const fetchComments = (filmId) => (dispatch, _getState, api) => (
@@ -44,3 +51,4 @@ export const postComment = ({rating, comment}, filmId) => (dispatch, _getState, 
   api.post(`comments/${filmId}`, {rating, comment})
   .then(() => dispatch(redirectToRoute(`/films/${filmId}`)))
 );
+

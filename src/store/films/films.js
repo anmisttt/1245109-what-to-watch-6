@@ -1,8 +1,9 @@
-import {ActionType} from './action';
+import {ActionType} from '../action';
 
 const initialState = {
   genre: `All genres`,
-  visibleFilmsCount: 8
+  activeFilmId: 0,
+  visibleFilmsCount: 8,
 };
 
 const films = (state = initialState, action) => {
@@ -21,6 +22,11 @@ const films = (state = initialState, action) => {
       return {
         ...state,
         visibleFilmsCount: action.payload
+      };
+    case ActionType.CHANGE_ACTIVE_FILM:
+      return {
+        ...state,
+        activeFilmId: action.payload
       };
     default:
       return state;

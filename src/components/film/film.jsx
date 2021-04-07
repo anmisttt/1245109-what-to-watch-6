@@ -6,18 +6,18 @@ import {connect} from 'react-redux';
 import Logo from '../logo/logo';
 import Header from '../header/header';
 import {useParams} from 'react-router-dom';
-import {fetchFilm} from '../../store/api-actions';
+import {fetchCurrentFilm} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {useHistory} from 'react-router-dom';
+import {getFilms, getCurrentFilm, getStatusCurrentFilmLoaded} from '../../store/data/selectors';
+import MovieButtons from '../movie-buttons/MovieButtons';
 
 const Film = (props) => {
-  const {films, authorizationStatus, getCurrentFilm, isCurrentFilmLoaded, currentFilm} = props;
+  const {films, loadCurrentFilm, isCurrentFilmLoaded, currentFilm} = props;
   const filmId = useParams().id;
-  const history = useHistory();
 
   useEffect(() => {
     if (!isCurrentFilmLoaded) {
-      getCurrentFilm(filmId);
+      loadCurrentFilm(filmId);
     }
   }, [isCurrentFilmLoaded, filmId]);
 
@@ -67,24 +67,7 @@ const Film = (props) => {
                   <span className="movie-card__year">{currentFilm.released}</span>
                 </p>
 
-                <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"></use>
-                    </svg>
-                    <span>Play</span>
-                  </button>
-                  <button className="btn btn--list movie-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"></use>
-                    </svg>
-                    <span>My list</span>
-                  </button>
-                  {authorizationStatus && <a href="add-review.html" className="btn movie-card__button" onClick = {(evt)=> {
-                    evt.preventDefault();
-                    history.push(`${filmId}/review`);
-                  }} >Add review</a>}
-                </div>
+                <MovieButtons isFilm={true}></MovieButtons>
               </div>
             </div>
           </div>
@@ -124,22 +107,20 @@ const Film = (props) => {
 
 Film.propTypes = {
   films: PropTypes.array.isRequired,
-  authorizationStatus: PropTypes.bool.isRequired,
-  getCurrentFilm: PropTypes.func.isRequired,
+  loadCurrentFilm: PropTypes.func.isRequired,
   currentFilm: PropTypes.object.isRequired,
   isCurrentFilmLoaded: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  films: state.films,
-  currentFilm: state.currentFilm,
-  isCurrentFilmLoaded: state.isCurrentFilmLoaded
+  films: getFilms(state),
+  currentFilm: getCurrentFilm(state),
+  isCurrentFilmLoaded: getStatusCurrentFilmLoaded(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCurrentFilm(filmId) {
-    dispatch(fetchFilm(filmId));
+  loadCurrentFilm(filmId) {
+    dispatch(fetchCurrentFilm(filmId));
   }
 });
 

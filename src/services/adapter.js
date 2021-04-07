@@ -1,4 +1,5 @@
 const getAdaptedFilm = (film) => {
+
   const adaptedFilm = {
     ...film,
     posterImage: film.poster_image,

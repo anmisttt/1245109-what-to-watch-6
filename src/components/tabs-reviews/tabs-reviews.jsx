@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import {fetchComments} from '../../store/api-actions';
 import PropTypes from 'prop-types';
 import {useParams} from 'react-router-dom';
+import {getComments, getStatusCommentsLoaded} from '../../store/data/selectors';
 
-const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
+const TabsReviews = ({comments, isCommentsLoaded, loadCommnets}) => {
 
   const filmId = useParams().id;
 
@@ -12,10 +13,9 @@ const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
     `July`, `August`, `September`, `October`, `November`, `December`
   ];
 
-
   useEffect(() => {
     if (!isCommentsLoaded) {
-      getCommnets(filmId);
+      loadCommnets(filmId);
     }
   }, [isCommentsLoaded]);
 
@@ -49,16 +49,16 @@ const TabsReviews = ({comments, isCommentsLoaded, getCommnets}) => {
 TabsReviews.propTypes = {
   comments: PropTypes.array.isRequired,
   isCommentsLoaded: PropTypes.bool.isRequired,
-  getCommnets: PropTypes.func.isRequired
+  loadCommnets: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  comments: state.comments,
-  isCommentsLoaded: state.isCommentsLoaded
+  comments: getComments(state),
+  isCommentsLoaded: getStatusCommentsLoaded(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCommnets(filmId) {
+  loadCommnets(filmId) {
     dispatch(fetchComments(filmId));
   }
 });

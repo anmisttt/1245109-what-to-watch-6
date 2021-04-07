@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {getCurrentFilm} from '../../store/data/selectors';
 
 const TabsDetails = ({currentFilm}) => {
   return (
@@ -43,7 +44,7 @@ TabsDetails.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  currentFilm: state.currentFilm
+  currentFilm: getCurrentFilm(state)
 });
 
 export {TabsDetails};

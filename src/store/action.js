@@ -3,12 +3,13 @@ export const ActionType = {
   INCREASE_VISIBLE_FILMS_COUNT: `films/increaseVisibleFilmsCount`,
   RESET_VISIBLE_FILMS_COUNT: `films/resetvisibleFilmsCount`,
   LOAD_FILMS: `data/loadFilms`,
-  LOAD_FILM: `data/loadFilm`,
+  LOAD_CURRENT_FILM: `data/loadCurrentFilm`,
+  LOAD_PROMO_FILM: `data/loadPromoFilm`,
   LOAD_COMMENTS: `data/loadComments`,
+  RESET_CURRENT_FILM: `data/resetCurrentFilm`,
   CHANGE_AUTHORIZATION: `user/changeAuthorization`,
   REDIRECT_TO_ROUTE: `film/redirectToRoute`,
-  CHANGE_ACTIVE_FILM: `film/changeActiveFilm`,
-  RESET_CURRENT_FILM: `film/resetCurrentFilm`
+  CHANGE_ACTIVE_FILM: `film/changeActiveFilm`
 };
 
 export const changeGenre = (genre) => ({
@@ -27,8 +28,12 @@ export const loadFilms = (films) => ({
   type: ActionType.LOAD_FILMS,
   payload: films
 });
-export const loadFilm = (film) => ({
-  type: ActionType.LOAD_FILM,
+export const loadCurrentFilm = (film) => ({
+  type: ActionType.LOAD_CURRENT_FILM,
+  payload: film
+});
+export const loadPromoFilm = (film) => ({
+  type: ActionType.LOAD_PROMO_FILM,
   payload: film
 });
 export const loadComments = (comments) => ({

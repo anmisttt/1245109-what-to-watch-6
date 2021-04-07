@@ -1,11 +1,13 @@
-import {ActionType} from './action';
+import {ActionType} from '../action';
 
 const initialState = {
   films: [],
   comments: [],
   currentFilm: {},
+  promoFilm: {},
   isDataLoaded: false,
   isCurrentFilmLoaded: false,
+  isPromoFilmLoaded: false,
   isCommentsLoaded: false
 };
 
@@ -18,17 +20,28 @@ const data = (state = initialState, action) => {
         films: action.payload,
         isDataLoaded: true
       };
-    case ActionType.LOAD_FILM:
+    case ActionType.LOAD_CURRENT_FILM:
       return {
         ...state,
         currentFilm: action.payload,
         isCurrentFilmLoaded: true
+      };
+    case ActionType.LOAD_PROMO_FILM:
+      return {
+        ...state,
+        promoFilm: action.payload,
+        isPromoFilmLoaded: true
       };
     case ActionType.LOAD_COMMENTS:
       return {
         ...state,
         comments: action.payload,
         isCommentsLoaded: true
+      };
+    case ActionType.RESET_CURRENT_FILM:
+      return {
+        ...state,
+        isCurrentFilmLoaded: false
       };
 
     default:

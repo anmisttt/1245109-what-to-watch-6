@@ -13,10 +13,11 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchFilmsList} from '../../store/api-actions';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
+import {getFilms, getStatusDataLoaded} from '../../store/data/selectors';
 
 
 const App = (props) => {
-  const {filmInfo, films, isDataLoaded, onLoadData} = props;
+  const {films, isDataLoaded, onLoadData} = props;
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -28,9 +29,7 @@ const App = (props) => {
     (isDataLoaded) ?
       <BrowserRouter history={browserHistory}>
         <Switch>
-          <Route exact path="/" render={({history}) => (
-            <Main filmInfo={filmInfo} films={films} onLoginButtonClick={() => history.push(`/login`)}></Main>
-          )}/>
+          <Route exact path="/"><Main/></Route>
           <Route exact path="/login"> <SignIn/></Route>
           <PrivateRoute exact
             path="/mylist"
@@ -56,19 +55,15 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  filmInfo: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-  }),
+
   films: PropTypes.array.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
-  isDataLoaded: state.isDataLoaded
+  films: getFilms(state),
+  isDataLoaded: getStatusDataLoaded(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

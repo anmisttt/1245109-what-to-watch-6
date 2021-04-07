@@ -2,12 +2,13 @@ import React, {useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {fetchFilm, postComment} from '../../store/api-actions';
+import {fetchCurrentFilm, postComment} from '../../store/api-actions';
 import {useParams} from 'react-router-dom';
 import Header from '../header/header';
+import {getCurrentFilm, getStatusCurrentFilmLoaded} from '../../store/data/selectors';
 
 const AddReview = (props) => {
-  const {currentFilm, isCurrentFilmLoaded, getCurrentFilm, onSubmit} = props;
+  const {currentFilm, isCurrentFilmLoaded, loadCurrentFilm, onSubmit} = props;
 
   const [isActive, setActive] = useState(false);
 
@@ -30,7 +31,7 @@ const AddReview = (props) => {
 
   useEffect(() => {
     if (!isCurrentFilmLoaded) {
-      getCurrentFilm(filmId);
+      loadCurrentFilm(filmId);
     }
   }, [isCurrentFilmLoaded]);
 
@@ -143,19 +144,19 @@ const AddReview = (props) => {
 
 AddReview.propTypes = {
   currentFilm: PropTypes.object.isRequired,
-  getCurrentFilm: PropTypes.func.isRequired,
+  loadCurrentFilm: PropTypes.func.isRequired,
   isCurrentFilmLoaded: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  currentFilm: state.currentFilm,
-  isCurrentFilmLoaded: state.isCurrentFilmLoaded
+  currentFilm: getCurrentFilm(state),
+  isCurrentFilmLoaded: getStatusCurrentFilmLoaded(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCurrentFilm(filmId) {
-    dispatch(fetchFilm(filmId));
+  loadCurrentFilm(filmId) {
+    dispatch(fetchCurrentFilm(filmId));
   },
   onSubmit(postData, filmId) {
     dispatch(postComment(postData, filmId));
