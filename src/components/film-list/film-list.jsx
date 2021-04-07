@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import FilmCard from '../film-card/film-card';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {redirectToRoute, resetCurrentFilm} from '../../store/action';
 
 const FilmList = (props) => {
-  const {films, genre, visibleFilmsCount, redirectToActiveFilm, resetCurrentFilm} = props;
+  const {films, genre, visibleFilmsCount, redirectToActiveFilm, resetFilm} = props;
   const [isActive, setActive] = useState(0);
   const similarFilms = (genre) ? films.filter((film) => film.genre === genre) : [];
   const clickHandler = (url) => {
-    resetCurrentFilm();
+    resetFilm();
     redirectToActiveFilm(url);
   };
   return (
@@ -43,7 +43,7 @@ FilmList.propTypes = {
   visibleFilmsCount: PropTypes.number.isRequired,
   activeFilmId: PropTypes.number.isRequired,
   redirectToActiveFilm: PropTypes.func.isRequired,
-  resetCurrentFilm: PropTypes.func.isRequired
+  resetFilm: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -53,10 +53,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   redirectToActiveFilm(url) {
-    dispatch(ActionCreator.redirectToRoute(url));
+    dispatch(redirectToRoute(url));
   },
-  resetCurrentFilm() {
-    dispatch(ActionCreator.resetCurrentFilm());
+  resetFilm() {
+    dispatch(resetCurrentFilm());
   }
 
 });

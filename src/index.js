@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import App from "./components/app/app";
 import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux';
-import {reducer} from './store/reducer';
+import rootReducer from './store/root-reducer';
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from 'redux-thunk';
 import {createAPI} from "./services/api";
 import {checkAuth} from './store/api-actions';
-import {ActionCreator} from "./store/action";
+import {changeAuthorization} from "./store/action";
 import {redirect} from "./store/middlewares/redirect";
 
 const Setting = {
@@ -20,11 +20,11 @@ const Setting = {
 };
 
 const api = createAPI(
-    () => store.dispatch(ActionCreator.changeAuthorization(false))
+    () => store.dispatch(changeAuthorization(false))
 );
 
 const store = createStore(
-    reducer,
+    rootReducer,
     composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument(api)),
         applyMiddleware(redirect)

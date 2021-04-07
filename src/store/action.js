@@ -1,6 +1,6 @@
 export const ActionType = {
   CHANGE_GENRE: `films/changeGenre`,
-  INCREASE_VISIBLE_FILMS_COUNT: `films/increasevisibleFilmsCount`,
+  INCREASE_VISIBLE_FILMS_COUNT: `films/increaseVisibleFilmsCount`,
   RESET_VISIBLE_FILMS_COUNT: `films/resetvisibleFilmsCount`,
   LOAD_FILMS: `data/loadFilms`,
   LOAD_FILM: `data/loadFilm`,
@@ -11,44 +11,43 @@ export const ActionType = {
   RESET_CURRENT_FILM: `film/resetCurrentFilm`
 };
 
-export const ActionCreator = {
-  changeGenre: (genre) => ({
-    type: ActionType.CHANGE_GENRE,
-    payload: genre
-  }),
-  increasevisibleFilmsCount: () => ({
-    type: ActionType.INCREASE_VISIBLE_FILMS_COUNT,
-    payload: 8
-  }),
-  resetvisibleFilmsCount: () => ({
-    type: ActionType.RESET_VISIBLE_FILMS_COUNT,
-    payload: 8
-  }),
-  loadFilms: (films) => ({
-    type: ActionType.LOAD_FILMS,
-    payload: films
-  }),
-  loadFilm: (film) => ({
-    type: ActionType.LOAD_FILM,
-    payload: film
-  }),
-  loadComments: (comments) => ({
-    type: ActionType.LOAD_COMMENTS,
-    payload: comments
-  }),
-  changeAuthorization: (isAuthorized) => ({
-    type: ActionType.CHANGE_AUTHORIZATION,
-    payload: isAuthorized
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-  changeActiveFilm: (activeFilmId) => ({
-    type: ActionType.CHANGE_ACTIVE_FILM,
-    payload: activeFilmId
-  }),
-  resetCurrentFilm: () => ({
-    type: ActionType.RESET_CURRENT_FILM
-  })
-};
+export const changeGenre = (genre) => ({
+  type: ActionType.CHANGE_GENRE,
+  payload: genre
+});
+export const increaseVisibleFilmsCount = () => ({
+  type: ActionType.INCREASE_VISIBLE_FILMS_COUNT,
+  payload: 8
+});
+export const resetvisibleFilmsCount = () => ({
+  type: ActionType.RESET_VISIBLE_FILMS_COUNT,
+  payload: 8
+});
+export const loadFilms = (films) => ({
+  type: ActionType.LOAD_FILMS,
+  payload: films
+});
+export const loadFilm = (film) => ({
+  type: ActionType.LOAD_FILM,
+  payload: film
+});
+export const loadComments = (comments) => ({
+  type: ActionType.LOAD_COMMENTS,
+  payload: comments
+});
+export const changeAuthorization = (isAuthorized) => ({
+  type: ActionType.CHANGE_AUTHORIZATION,
+  payload: isAuthorized
+});
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
+export const changeActiveFilm = (activeFilmId) => ({
+  type: ActionType.CHANGE_ACTIVE_FILM,
+  payload: activeFilmId
+});
+export const resetCurrentFilm = () => ({
+  type: ActionType.RESET_CURRENT_FILM
+});
+

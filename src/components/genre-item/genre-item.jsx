@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {changeGenre, resetvisibleFilmsCount} from '../../store/action';
 
-const GenreItem = ({genre, isActive, setActive, updateGenre, resetvisibleFilmsCount}) => {
+const GenreItem = ({genre, isActive, setActive, updateGenre, updateVisibleFilmsCount}) => {
   return (<li className={(isActive) ? `catalog__genres-item catalog__genres-item--active` : `catalog__genres-item`} onClick={(evt) => {
     evt.preventDefault();
     updateGenre(genre);
-    resetvisibleFilmsCount();
+    updateVisibleFilmsCount();
     setActive();
   }}>
     <a href="#" className="catalog__genres-link">
@@ -21,15 +21,15 @@ GenreItem.propTypes = {
   isActive: PropTypes.bool.isRequired,
   setActive: PropTypes.func.isRequired,
   updateGenre: PropTypes.func.isRequired,
-  resetvisibleFilmsCount: PropTypes.func.isRequired
+  updateVisibleFilmsCount: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
   updateGenre(genre) {
-    dispatch(ActionCreator.changeGenre(genre));
+    dispatch(changeGenre(genre));
   },
-  resetvisibleFilmsCount() {
-    dispatch(ActionCreator.resetvisibleFilmsCount());
+  updateVisibleFilmsCount() {
+    dispatch(resetvisibleFilmsCount());
   }
 });
 

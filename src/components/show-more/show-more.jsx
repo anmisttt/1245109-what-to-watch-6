@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {increaseVisibleFilmsCount} from '../../store/action';
 
-const ShowMore = ({increasevisibleFilmsCount}) => {
+const ShowMore = ({updateVisibleFilmsCount}) => {
   return (<div className="catalog__more">
     <button className="catalog__button" type="button" onClick={(evt) => {
       evt.preventDefault();
-      increasevisibleFilmsCount();
+      updateVisibleFilmsCount();
     }}>
       Show more
     </button>
@@ -15,12 +15,12 @@ const ShowMore = ({increasevisibleFilmsCount}) => {
 };
 
 ShowMore.propTypes = {
-  increasevisibleFilmsCount: PropTypes.func.isRequired
+  updateVisibleFilmsCount: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispantch) => ({
-  increasevisibleFilmsCount() {
-    dispantch(ActionCreator.increasevisibleFilmsCount());
+  updateVisibleFilmsCount() {
+    dispantch(increaseVisibleFilmsCount());
   }
 });
 
